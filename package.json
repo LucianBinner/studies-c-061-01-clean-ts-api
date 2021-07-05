@@ -5,6 +5,7 @@
   "author": "Binner <lucian.binner@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^16.0.0",
     "@types/validator": "^13.6.2",
@@ -31,6 +32,7 @@
     "test:ci": "npm test -- --coverage"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "validator": "^13.6.0"
   }
 }
