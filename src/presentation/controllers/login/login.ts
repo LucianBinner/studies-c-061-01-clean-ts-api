@@ -14,12 +14,14 @@ export class LoginController implements Controller {
             const { email, password } = httpRequest.body
             const requiredField = ['email', 'password']
             for (const field of requiredField) {
-                if (!httpRequest.body[field])
+                if (!httpRequest.body[field]) {
                     return badRequest(new MissingParamError(field))
+                }
             }
             const isValid = this.emailValidator.isValid(email)
-            if (!isValid)
+            if (!isValid) {
                 return badRequest(new InvalidParamError('email'))
+            }
             const accessToken = await this.authentication.auth(email, password)
             if (!accessToken) {
                 return unauthorizedError()
