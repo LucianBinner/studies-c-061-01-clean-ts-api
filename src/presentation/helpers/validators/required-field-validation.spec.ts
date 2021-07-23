@@ -6,5 +6,11 @@ describe('RequiredField Validation', () => {
         const sut = new RequiredFieldValidation('field')
         const error = sut.validate({ fieldless: 'fieldless'})
         expect(error).toEqual(new MissingParamError('field'))
-    });
-});
+    })
+    
+    test('Should not return if validation succeeds', () => {
+        const sut = new RequiredFieldValidation('field')
+        const error = sut.validate({ field: 'field'})
+        expect(error).toBeFalsy()
+    })
+})
