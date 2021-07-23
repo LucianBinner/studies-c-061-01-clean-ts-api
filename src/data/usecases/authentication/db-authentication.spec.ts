@@ -1,5 +1,5 @@
 import { AuthenticationModel } from "../../../domain/usecases/authentication";
-import { LoadAccountByEmailRepository } from "../../protocols/load-account-by-email-repository";
+import { LoadAccountByEmailRepository } from "../../protocols/db/load-account-by-email-repository";
 import { AccountModel } from "../add-acccount/db-add-account-protocols";
 import { DbAuthentication } from "./db-authentication";
 
@@ -50,6 +50,6 @@ describe('DbAuthentication UseCase', () => {
         const { sut, loadAccountByEmailRepositoryStub } = makeSut()
         jest.spyOn(loadAccountByEmailRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
         const promise = sut.auth(makeFakeAuthentication())
-        await expect(promise).rejects.toThrow
+        await expect(promise).rejects.toThrow()
     })
 })
