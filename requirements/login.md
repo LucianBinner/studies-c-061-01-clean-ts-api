@@ -1,6 +1,7 @@
 # Login
 
 > ## Caso de sucesso:
+
 1. ✅ Recebe um requisição do tipo **POST** na rota **/api/login**
 1. ✅ Valida dados obrigatórios **email** e **password**
 1. ✅ Valida campo **email** é um e-mail válido
@@ -9,7 +10,8 @@
 1. ✅ Atualiza os dados do usuário com o token de acesso gerado
 1. ✅ Retorna 200 com o token de acesso
 
-> ## Exceções
+> ## Exceções:
+
 1. ✅ Retorna erro 404 se a API não existir
 1. ✅ Retorna erro 400 se **email** ou **password** não forem fornecidos pelo client
 1. ✅ Retorna erro 400 se o campo **email** for um e-mail inválido

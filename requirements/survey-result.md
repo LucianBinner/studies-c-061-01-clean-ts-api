@@ -2,4 +2,4 @@
 
 > ## Caso de sucesso:
 
-> ## Exceções
+> ## Exceções:
