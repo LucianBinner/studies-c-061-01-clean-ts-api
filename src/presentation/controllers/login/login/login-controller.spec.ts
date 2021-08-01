@@ -3,11 +3,11 @@ import { Authentication, HttpRequest } from "./login-controller-protocols";
 import { Validation } from "../signup/signup-controller-protocols";
 import { MissingParamError } from "@/presentation/errors";
 import { badRequest, ok, serverError, unauthorizedError } from "@/presentation/helpers/http/http-helper";
-import { AuthenticationModel } from "@/domain/usecases/account/authentication";
+import { AuthenticationParams } from "@/domain/usecases/account/authentication";
 
 const makeAuthentication = (): Authentication => {
     class AuthenticationStub implements Authentication {
-        auth(authentication: AuthenticationModel): Promise<string | null> {
+        auth(authentication: AuthenticationParams): Promise<string | null> {
             return new Promise(resolve => resolve('any_token'))
         }
     }

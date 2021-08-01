@@ -1,7 +1,7 @@
 import { AccountModel } from '@/domain/models/account';
 import { SurveyModel } from '@/domain/models/survey';
-import { AddAccountModel } from '@/domain/usecases/account/add-account';
-import { AddSurveyModel } from '@/domain/usecases/survey/add-survey';
+import { AddAccountParams } from '@/domain/usecases/account/add-account';
+import { AddSurveyParams } from '@/domain/usecases/survey/add-survey';
 import { Collection } from 'mongodb';
 import { MongoHelper } from '../helpers/mongo-helper';
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository';
@@ -10,7 +10,7 @@ let surveyCollection: Collection
 let surveyResultCollection: Collection
 let accountCollection: Collection
 
-const makeFakeSurvey = (): AddSurveyModel => ({
+const makeFakeSurvey = (): AddSurveyParams => ({
   question: 'any_question',
   answers: [
     {
@@ -24,7 +24,7 @@ const makeFakeSurvey = (): AddSurveyModel => ({
   date: new Date()
 })
 
-const makeFakeAddAccount = (): AddAccountModel => ({
+const makeFakeAddAccount = (): AddAccountParams => ({
   name: 'any_name',
   email: 'any_email',
   password: 'any_password'
