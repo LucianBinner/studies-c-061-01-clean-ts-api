@@ -1,8 +1,7 @@
 import { throwError } from "@/domain/test";
 import { MissingParamError } from "@/presentation/errors";
 import { badRequest, ok, serverError, unauthorizedError } from "@/presentation/helpers/http/http-helper";
-import { mockAuthentication } from "@/presentation/test";
-import { mockValidation } from "@/presentation/test";
+import { mockAuthentication, mockValidation } from "@/presentation/test";
 import { Validation } from "../signup/signup-controller-protocols";
 import { LoginController } from "./login-controller";
 import { Authentication, HttpRequest } from "./login-controller-protocols";
@@ -46,7 +45,7 @@ describe('Login Controller', () => {
         const { sut, authenticationStub } = makeSut()
         jest
             .spyOn(authenticationStub, 'auth')
-            .mockReturnValueOnce(new Promise(resolve => resolve(null)))
+            .mockReturnValueOnce(Promise.resolve(null))
         const httpResponse = await sut.handle(mockRequest())
         expect(httpResponse).toEqual(unauthorizedError())
     })
