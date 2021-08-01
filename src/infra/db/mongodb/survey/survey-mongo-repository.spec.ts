@@ -1,23 +1,9 @@
-import { Collection } from 'mongodb'
+import { mockSurveyParams } from '@/domain/test';
+import { Collection } from 'mongodb';
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper';
 import { SurveyMongoRepository } from './survey-mongo-repository';
-import { MongoHelper } from '../helpers/mongo-helper';
-import { AddSurveyParams } from '@/domain/usecases/survey/add-survey';
 
 let surveyCollection: Collection
-
-const makeFakeRequest = (): AddSurveyParams => ({
-  question: 'any_question',
-  answers: [
-    {
-      image: 'any_image',
-      answer: 'any_answer'
-    },
-    {
-      answer: 'other_answer'
-    },
-  ],
-  date: new Date()
-})
 
 const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
@@ -40,7 +26,7 @@ describe('Survey Mongo Repository', () => {
   describe('add()', () => {
     test('Should add a survey on success', async () => {
       const sut = makeSut()
-      await sut.add(makeFakeRequest())
+      await sut.add(mockSurveyParams())
       const survey = await surveyCollection.findOne({ question: 'any_question' })
       expect(survey).toBeTruthy()
     })
@@ -48,9 +34,9 @@ describe('Survey Mongo Repository', () => {
 
   describe('loadAll()', () => {
     test('Should load all a survey on success', async () => {
-      const makeFakeOtherRequest = Object.assign({}, makeFakeRequest())
-      makeFakeOtherRequest.question = 'other_question'
-      await surveyCollection.insertMany([makeFakeRequest(), makeFakeOtherRequest])
+      const mockOtherSurveyParams = Object.assign({}, mockSurveyParams())
+      mockOtherSurveyParams.question = 'other_question'
+      await surveyCollection.insertMany([mockSurveyParams(), mockOtherSurveyParams])
       const sut = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(2)
@@ -68,7 +54,7 @@ describe('Survey Mongo Repository', () => {
 
   describe('loadById()', () => {
     test('Should load survey by id on success', async () => {
-      const res = await surveyCollection.insertOne(makeFakeRequest())
+      const res = await surveyCollection.insertOne(mockSurveyParams())
       const id = res.ops[0]._id
       const sut = makeSut()
       const survey = await sut.loadById(id)
