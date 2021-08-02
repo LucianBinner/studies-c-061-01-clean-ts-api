@@ -13,7 +13,7 @@ export const signUpPath = {
     },
     responses: {
       200: {
-        description: 'Success',
+        description: 'Sucesso',
         content: {
           'application/json': {
             schema: {
